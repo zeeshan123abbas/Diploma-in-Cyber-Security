@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drop a Log File</title>
+  <style>
+    #zone { border: 3px dashed #0b3d91; padding: 40px; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Log Line Counter</h1>
+  <div id="zone">Drop a .txt or .log file here (read locally, never uploaded)</div>
+  <pre id="info"></pre>
+
+  <script>
+    const zone = document.querySelector("#zone");
+    zone.addEventListener("dragover", e => e.preventDefault());   // allow drop
+
+    zone.addEventListener("drop", async (e) => {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];      // first dropped file
+      if (!file) return;
+      const text = await file.text();            // read contents in the browser
+      const lines = text.split(/\r?\n/).filter(line => line.trim() !== "");
+      document.querySelector("#info").textContent =
+        `Name : ${file.name}\nSize : ${file.size} bytes\nLines: ${lines.length}`;
+    });
+  </script>
+</body>
+</html>
