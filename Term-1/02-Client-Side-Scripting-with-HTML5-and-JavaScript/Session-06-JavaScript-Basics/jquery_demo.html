@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery vs Plain JavaScript</title>
+  <!-- official jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <button id="jqBtn">Click (jQuery)</button>
+  <button id="jsBtn">Click (plain JS)</button>
+  <p id="msg">Waiting...</p>
+
+  <script>
+    // jQuery version
+    $("#jqBtn").on("click", function () {
+      $("#msg").text("Clicked with jQuery");
+    });
+
+    // plain JavaScript version
+    document.querySelector("#jsBtn").addEventListener("click", function () {
+      document.querySelector("#msg").textContent = "Clicked with plain JavaScript";
+    });
+  </script>
+</body>
+</html>
