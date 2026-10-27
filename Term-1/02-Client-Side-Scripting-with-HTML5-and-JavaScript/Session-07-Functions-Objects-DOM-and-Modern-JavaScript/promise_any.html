@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Promise.any and Top-level Await</title>
+</head>
+<body>
+  <p id="out">Contacting mirrors...</p>
+
+  <!-- type="module" allows top-level await -->
+  <script type="module">
+    // returns a promise that succeeds or fails after ms milliseconds
+    const wait = (ms, label, ok = true) =>
+      new Promise((resolve, reject) =>
+        setTimeout(() => ok ? resolve(label) : reject(new Error(label)), ms));
+
+    try {
+      const fastest = await Promise.any([
+        wait(900, "Mirror A"),
+        wait(300, "Mirror B", false),          // this one fails
+        wait(500, "Mirror C")
+      ]);
+      document.querySelector("#out").textContent = `First working mirror: ${fastest}`;
+    } catch (err) {
+      // AggregateError when every promise fails
+      document.querySelector("#out").textContent = `All mirrors failed (${err.errors.length})`;
+    }
+  </script>
+</body>
+</html>
