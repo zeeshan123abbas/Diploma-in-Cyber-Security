@@ -1,0 +1,7 @@
+[
+  { "text": "Which tag tells the browser the page is HTML5?", "options": ["<html5>", "<!DOCTYPE html>", "<meta html>"], "answer": 1 },
+  { "text": "Which property safely writes user text into the page?", "options": ["innerHTML", "textContent", "document.write"], "answer": 1 },
+  { "text": "Where should a session token be stored?", "options": ["localStorage", "HttpOnly cookie", "A hidden field"], "answer": 1 },
+  { "text": "Which form method puts data in the URL?", "options": ["GET", "POST", "PUT"], "answer": 0 },
+  { "text": "What does Promise.any return?", "options": ["The first settled promise", "The first successful result", "All results"], "answer": 1 }
+]
