@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch External Content</title>
+</head>
+<body>
+  <h1>Lab Devices</h1>
+  <ul id="devices"></ul>
+  <script>
+    // works through a web server (e.g. VS Code Live Server), not file://
+    fetch("devices.json")
+      .then(response => response.json())          // text -> object
+      .then(devices => {
+        const ul = document.querySelector("#devices");
+        for (const d of devices) {
+          const li = document.createElement("li");
+          li.textContent = `${d.name} - ${d.ip} (${d.type})`;
+          ul.append(li);
+        }
+      })
+      .catch(err => console.error("Could not load devices:", err));
+  </script>
+</body>
+</html>
