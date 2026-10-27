@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IndexedDB Scan Log</title>
+</head>
+<body>
+  <h1>Scan Log (IndexedDB)</h1>
+  <input id="target" placeholder="e.g. my-lab-vm">
+  <button id="add">Add scan record</button>
+  <ul id="list"></ul>
+
+  <script>
+    let db;
+    const request = indexedDB.open("labDB", 1);          // name, version
+
+    // runs the first time (or when version increases)
+    request.onupgradeneeded = (event) => {
+      db = event.target.result;
+      db.createObjectStore("scans", { keyPath: "id", autoIncrement: true });
+    };
+
+    request.onsuccess = (event) => {
+      db = event.target.result;
+      showAll();
+    };
+
+    document.querySelector("#add").addEventListener("click", () => {
+      const target = document.querySelector("#target").value.trim();
+      if (!target) return;
+      const tx = db.transaction("scans", "readwrite");   // write transaction
+      tx.objectStore("scans").add({ target, time: new Date().toISOString() });
+      tx.oncomplete = showAll;
+    });
+
+    function showAll() {
+      const list = document.querySelector("#list");
+      list.replaceChildren();                             // clear the list
+      const tx = db.transaction("scans", "readonly");
+      tx.objectStore("scans").getAll().onsuccess = (e) => {
+        for (const rec of e.target.result) {
+          const li = document.createElement("li");
+          li.textContent = `#${rec.id} ${rec.target} at ${rec.time}`;
+          list.append(li);
+        }
+      };
+    }
+  </script>
+</body>
+</html>
