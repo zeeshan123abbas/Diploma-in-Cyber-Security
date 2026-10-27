@@ -11,7 +11,7 @@ Term 1 builds the foundation every security professional needs. You start by lea
 | No | Module | Sessions | Link |
 |---|---|---|---|
 | 01 | Programming in C | 10 | [Open module](./01-Programming-in-C/README.md) |
-| 02 | Client-Side Scripting with HTML5 and JavaScript | 10 | Coming soon |
+| 02 | Client-Side Scripting with HTML5 and JavaScript | 10 | [Open module](./02-Client-Side-Scripting-with-HTML5-and-JavaScript/README.md) |
 | 03 | Technologies of Computer Networks | 12 | Coming soon |
 | 04 | Configuring Network Infrastructure | 10 | Coming soon |
 | 05 | Introduction to Cyber Security Frameworks | 10 | Coming soon |
