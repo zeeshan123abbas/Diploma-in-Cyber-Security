@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <style>
+    label { display: block; margin: 10px 0; }
+    input:invalid { border: 2px solid #c0392b; }   /* pseudo-class for bad input */
+    input:valid   { border: 2px solid #27ae60; }
+  </style>
+</head>
+<body>
+  <h1>Lab Registration</h1>
+  <form action="#" method="post">
+    <label>Full name <input type="text" name="name" required minlength="3"></label>
+    <label>Email <input type="email" name="email" required></label>
+    <!-- pattern: two capital letters then four digits -->
+    <label>Roll no <input type="text" name="roll" pattern="[A-Z]{2}[0-9]{4}" placeholder="CS1234"></label>
+    <label>Date of birth <input type="date" name="dob"></label>
+    <label>Skill level <input type="range" name="level" min="1" max="5"></label>
+    <label>Course <input list="courses" name="course"></label>
+    <datalist id="courses">
+      <option value="Cybersecurity">
+      <option value="Networking">
+    </datalist>
+    <!-- hidden: not visible, but NOT secret -->
+    <input type="hidden" name="batch" value="2601">
+    <button type="submit">Register</button>
+  </form>
+</body>
+</html>
