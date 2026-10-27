@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drag and Drop Board</title>
+  <style>
+    .board { display: flex; gap: 16px; }
+    .column { flex: 1; min-height: 200px; background: #f3f6fb; padding: 10px; border-radius: 8px; }
+    .task { background: #fff; border: 1px solid #aaa; padding: 8px; margin: 6px 0; cursor: grab; }
+  </style>
+</head>
+<body>
+  <h1>Patch Tasks</h1>
+  <div class="board">
+    <div class="column" id="todo">
+      <h2>To do</h2>
+      <div class="task" id="t1" draggable="true">Update router firmware</div>
+      <div class="task" id="t2" draggable="true">Patch Windows VM</div>
+    </div>
+    <div class="column" id="doing"><h2>Doing</h2></div>
+  </div>
+
+  <script>
+    // 1. remember which card is being dragged
+    document.querySelectorAll(".task").forEach(task => {
+      task.addEventListener("dragstart", e => e.dataTransfer.setData("text/plain", task.id));
+    });
+
+    // 2. allow dropping on columns and move the card
+    document.querySelectorAll(".column").forEach(col => {
+      col.addEventListener("dragover", e => e.preventDefault());
+      col.addEventListener("drop", e => {
+        e.preventDefault();
+        const id = e.dataTransfer.getData("text/plain");
+        col.append(document.getElementById(id));
+      });
+    });
+  </script>
+</body>
+</html>
