@@ -1,0 +1,5 @@
+[
+  { "name": "Router-1", "ip": "192.168.10.1", "type": "router" },
+  { "name": "Switch-1", "ip": "192.168.10.2", "type": "switch" },
+  { "name": "Kali-VM", "ip": "192.168.10.50", "type": "virtual machine" }
+]
