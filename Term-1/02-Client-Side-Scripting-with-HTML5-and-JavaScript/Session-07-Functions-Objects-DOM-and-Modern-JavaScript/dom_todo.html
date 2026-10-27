@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM To-Do with JSON</title>
+</head>
+<body>
+  <h1>Lab Tasks</h1>
+  <input id="task" placeholder="e.g. Update VM">
+  <button id="add">Add</button>
+  <ul id="tasks"></ul>
+  <h2>Data as JSON</h2>
+  <pre id="json">[]</pre>
+
+  <script>
+    const list = document.querySelector("#tasks");
+    const input = document.querySelector("#task");
+    const tasks = [];                              // array of objects
+
+    document.querySelector("#add").addEventListener("click", () => {
+      const text = input.value.trim();
+      if (text === "") return;                     // ignore empty input
+      tasks.push({ text, done: false });
+
+      const li = document.createElement("li");     // new DOM node
+      li.textContent = text;                       // safe: no HTML parsing
+      list.append(li);
+      input.value = "";
+
+      document.querySelector("#json").textContent = JSON.stringify(tasks, null, 2);
+    });
+  </script>
+</body>
+</html>
