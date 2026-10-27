@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Storage Demo</title>
+</head>
+<body>
+  <h1>Lab Notes</h1>
+  <p>Notes are saved in localStorage. Do not type passwords here.</p>
+  <textarea id="notes" rows="6" cols="50"></textarea>
+  <p id="visits"></p>
+  <button id="clear">Clear notes</button>
+
+  <script>
+    const notes = document.querySelector("#notes");
+    notes.value = localStorage.getItem("labNotes") ?? "";     // load saved notes
+
+    notes.addEventListener("input", () => {
+      localStorage.setItem("labNotes", notes.value);          // save on change
+    });
+
+    document.querySelector("#clear").addEventListener("click", () => {
+      localStorage.removeItem("labNotes");
+      notes.value = "";
+    });
+
+    // sessionStorage: resets when this tab closes
+    let visits = Number(sessionStorage.getItem("visits") ?? 0) + 1;
+    sessionStorage.setItem("visits", visits);
+    document.querySelector("#visits").textContent = `Visits in this tab: ${visits}`;
+  </script>
+</body>
+</html>
