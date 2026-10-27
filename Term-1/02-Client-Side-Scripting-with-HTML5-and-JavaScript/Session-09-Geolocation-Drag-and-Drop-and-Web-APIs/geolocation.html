@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Geolocation</title>
+</head>
+<body>
+  <h1>Where am I?</h1>
+  <p>Run from localhost or HTTPS. Your location stays in this page only.</p>
+  <button id="locate">Show my location</button>
+  <p id="out"></p>
+  <iframe id="map" title="Map" width="500" height="300" style="border:1px solid #ccc"></iframe>
+
+  <script>
+    const out = document.querySelector("#out");
+
+    document.querySelector("#locate").addEventListener("click", () => {
+      if (!("geolocation" in navigator)) {
+        out.textContent = "Geolocation not supported";
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {                                       // success
+          const { latitude, longitude, accuracy } = pos.coords;
+          out.textContent = `Lat ${latitude.toFixed(4)}, Lon ${longitude.toFixed(4)} (±${Math.round(accuracy)} m)`;
+          document.querySelector("#map").src =
+            `https://www.openstreetmap.org/export/embed.html?bbox=${longitude - 0.01},${latitude - 0.01},${longitude + 0.01},${latitude + 0.01}&marker=${latitude},${longitude}`;
+        },
+        (err) => {                                       // error
+          out.textContent = `Error ${err.code}: ${err.message}`;
+        },
+        { enableHighAccuracy: true, timeout: 10000 }     // options
+      );
+    });
+  </script>
+</body>
+</html>
