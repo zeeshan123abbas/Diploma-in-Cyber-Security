@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas Network Diagram</title>
+  <style> canvas { border: 1px solid #ccc; } </style>
+</head>
+<body>
+  <canvas id="board" width="400" height="250"></canvas>
+  <script>
+    const ctx = document.querySelector("#board").getContext("2d");
+
+    // cables
+    ctx.strokeStyle = "#555";
+    ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(200, 60); ctx.lineTo(80, 180); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(200, 60); ctx.lineTo(320, 180); ctx.stroke();
+
+    // router as a circle
+    ctx.fillStyle = "#0b3d91";
+    ctx.beginPath(); ctx.arc(200, 60, 30, 0, Math.PI * 2); ctx.fill();
+
+    // PCs as semi-transparent rectangles
+    ctx.fillStyle = "rgba(39, 174, 96, 0.7)";
+    ctx.fillRect(50, 170, 60, 40);
+    ctx.fillRect(290, 170, 60, 40);
+
+    // labels
+    ctx.fillStyle = "#000";
+    ctx.font = "16px Arial";
+    ctx.fillText("Router", 172, 110);
+    ctx.fillText("PC1", 65, 230);
+    ctx.fillText("PC2", 305, 230);
+  </script>
+</body>
+</html>
