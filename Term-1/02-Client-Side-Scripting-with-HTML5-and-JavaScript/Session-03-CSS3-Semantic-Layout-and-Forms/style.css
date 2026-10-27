@@ -1,0 +1,21 @@
+/* base styles */
+body { font-family: Arial, sans-serif; margin: 0; }
+
+/* group selector */
+header, footer { background: #0b3d91; color: white; padding: 16px; }
+
+/* descendant selectors: only lists and links inside nav */
+nav ul { display: flex; gap: 16px; list-style: none; margin: 0; padding: 10px; background: #e8eef7; }
+nav a:link, nav a:visited { color: #0b3d91; text-decoration: none; }
+nav a:hover, nav a:focus { text-decoration: underline; }
+
+/* class selectors */
+.container { display: flex; gap: 20px; padding: 16px; }
+.alert { border-left: 4px solid #c0392b; padding: 8px; box-shadow: 0 2px 4px #ccc; }
+
+/* element selectors for layout areas */
+main { flex: 3; }
+aside { flex: 1; background: #f6f6f6; padding: 10px; border-radius: 8px; }
+
+/* ID selector */
+#welcome { color: #0b3d91; }
